@@ -34,7 +34,7 @@ export const handler: Handler = async (event) => {
     };
   }
 
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Chicago" });
 
   // Load drafts and find the target draft
   const drafts = await getDrafts(today);

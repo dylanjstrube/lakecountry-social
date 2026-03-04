@@ -76,7 +76,7 @@ export function buildDailyContext(date: Date): DailyContext {
   const upcomingHoliday = getUpcomingHoliday(date);
 
   return {
-    date: date.toISOString().split("T")[0],
+    date: date.toLocaleDateString("en-CA", { timeZone: "America/Chicago" }),
     season,
     productSpotlight,
     weatherNote: WEATHER_NOTES[season],

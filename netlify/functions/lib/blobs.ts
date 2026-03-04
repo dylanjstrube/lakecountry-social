@@ -4,48 +4,56 @@ import type { DraftPost, PublishedPost } from "./types.js";
 const DRAFTS_STORE = "social-drafts";
 const IMAGES_STORE = "social-images";
 
+// In production, netlify injects NETLIFY_BLOBS_CONTEXT automatically.
+// Locally, fall back to explicit siteID + token from env vars.
+function makeStore(name: string, opts: Record<string, unknown> = {}) {
+  const siteID = process.env.NETLIFY_SITE_ID;
+  const token = process.env.NETLIFY_AUTH_TOKEN;
+  return getStore({ name, ...(siteID && token ? { siteID, token } : {}), ...opts } as Parameters<typeof getStore>[0]);
+}
+
 export async function getDrafts(date: string): Promise<DraftPost[] | null> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   const raw = await store.get(`drafts/${date}`, { type: "json" });
   return raw as DraftPost[] | null;
 }
 
 export async function saveDrafts(date: string, drafts: DraftPost[]): Promise<void> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   await store.setJSON(`drafts/${date}`, drafts);
 }
 
 export async function getPublished(date: string): Promise<PublishedPost | null> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   const raw = await store.get(`published/${date}`, { type: "json" });
   return raw as PublishedPost | null;
 }
 
 export async function savePublished(post: PublishedPost): Promise<void> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   await store.setJSON(`published/${post.date}`, post);
 }
 
 export async function getLastRunDate(): Promise<string | null> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   const raw = await store.get("meta/last-run", { type: "text" });
   return raw as string | null;
 }
 
 export async function setLastRunDate(date: string): Promise<void> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   await store.set("meta/last-run", date);
 }
 
 export async function getImageLastUsed(imagePath: string): Promise<string | null> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   const key = `image-usage/${imagePath.replace(/\//g, "_")}`;
   const raw = await store.get(key, { type: "text" });
   return raw as string | null;
 }
 
 export async function setImageLastUsed(imagePath: string, date: string): Promise<void> {
-  const store = getStore(DRAFTS_STORE);
+  const store = makeStore(DRAFTS_STORE);
   const key = `image-usage/${imagePath.replace(/\//g, "_")}`;
   await store.set(key, date);
 }
@@ -55,7 +63,7 @@ export async function saveComposedImage(
   draftId: string,
   imageBuffer: Buffer
 ): Promise<string> {
-  const store = getStore({ name: IMAGES_STORE, consistency: "strong" });
+  const store = makeStore(IMAGES_STORE, { consistency: "strong" });
   const key = `${date}/${draftId}.jpg`;
   // Netlify Blobs accepts ArrayBufferView; Buffer is a Uint8Array (ArrayBufferView)
   await store.set(key, imageBuffer as unknown as ArrayBuffer, {

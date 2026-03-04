@@ -78,7 +78,7 @@ async function sendNotification(date: string): Promise<void> {
 
 export const handler: Handler = async () => {
   // Background functions return 202 immediately — the work continues after
-  const today = new Date().toISOString().split("T")[0];
+  const today = new Date().toLocaleDateString("en-CA", { timeZone: "America/Chicago" });
 
   // Async work runs after response is sent
   void runGeneration(today);

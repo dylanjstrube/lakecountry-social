@@ -9,7 +9,7 @@ import { getDrafts, getPublished } from "./lib/blobs.js";
 export const handler: Handler = async (event) => {
   const date =
     (event.queryStringParameters?.date as string) ??
-    new Date().toISOString().split("T")[0];
+    new Date().toLocaleDateString("en-CA", { timeZone: "America/Chicago" });
 
   // Basic date format validation
   if (!/^\d{4}-\d{2}-\d{2}$/.test(date)) {
