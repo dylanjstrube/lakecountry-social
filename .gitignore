@@ -1,0 +1,6 @@
+.env
+node_modules/
+.netlify/
+*.js.map
+.claude/
+deno.lock

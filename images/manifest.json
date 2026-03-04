@@ -1,0 +1,219 @@
+{
+  "images": [
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/foggy-wharf.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Foggy Wharf",
+      "tags": ["grey", "coastal", "modern", "neutral"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/rocky-harbor.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Rocky Harbor",
+      "tags": ["dark", "grey", "moody", "modern"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/toasted-sand.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Toasted Sand",
+      "tags": ["warm", "light", "neutral", "natural"],
+      "season": ["spring", "summer", "fall"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/honey-grove.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Honey Grove",
+      "tags": ["warm", "gold", "sun-comfortable", "summer"],
+      "season": ["spring", "summer"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/cinnamon-cove.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Cinnamon Cove",
+      "tags": ["warm", "brown", "traditional", "rich"],
+      "season": ["fall", "summer", "spring"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/golden-hour.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Golden Hour",
+      "tags": ["gold", "warm", "sun-comfortable", "bright"],
+      "season": ["spring", "summer"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/saddle.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Saddle",
+      "tags": ["brown", "traditional", "warm", "earthy"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/clam-shell.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Clam Shell",
+      "tags": ["grey", "light", "coastal", "neutral"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/tide-pool.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Tide Pool",
+      "tags": ["grey", "blue-grey", "sun-comfortable", "coastal"],
+      "season": ["spring", "summer", "fall"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/enhance/hero/pebble-beach.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "enhance",
+      "colorName": "Pebble Beach",
+      "tags": ["brown", "warm", "sun-comfortable", "natural"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/select/hero/whiskey-barrel.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "select",
+      "colorName": "Whiskey Barrel",
+      "tags": ["dark-brown", "rich", "warm", "traditional"],
+      "season": ["fall", "summer", "spring"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/select/hero/malted-barley.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "select",
+      "colorName": "Malted Barley",
+      "tags": ["warm", "tan", "natural", "earthy"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/select/hero/millstone.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "select",
+      "colorName": "Millstone",
+      "tags": ["grey", "modern", "sun-comfortable", "neutral"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/select/hero/pebble-grey.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "select",
+      "colorName": "Pebble Grey",
+      "tags": ["grey", "light", "neutral", "classic"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/select/hero/saddle.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "select",
+      "colorName": "Saddle",
+      "tags": ["brown", "traditional", "warm", "earthy"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/transcend/hero/island-mist.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "transcend",
+      "colorName": "Island Mist",
+      "tags": ["grey", "light", "coastal", "premium"],
+      "season": ["spring", "summer"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/transcend/hero/tiki-torch.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "transcend",
+      "colorName": "Tiki Torch",
+      "tags": ["warm", "gold", "tropical", "premium"],
+      "season": ["summer", "spring"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/transcend/hero/havana-gold.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "transcend",
+      "colorName": "Havana Gold",
+      "tags": ["gold", "warm", "rich", "premium"],
+      "season": ["summer", "fall"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/transcend/hero/spiced-rum.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "transcend",
+      "colorName": "Spiced Rum",
+      "tags": ["brown", "dark", "rich", "premium"],
+      "season": ["fall", "summer"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/transcend/hero/lava-rock.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "transcend",
+      "colorName": "Lava Rock",
+      "tags": ["dark", "charcoal", "modern", "premium"],
+      "season": ["all"]
+    },
+    {
+      "path": "https://www.lakecountrydecking.com/assets/images/products/transcend/hero/rope-swing.jpg",
+      "source": "local",
+      "type": "product",
+      "productLine": "transcend",
+      "colorName": "Rope Swing",
+      "tags": ["brown", "natural", "warm", "premium"],
+      "season": ["all"]
+    }
+  ],
+  "_notes": {
+    "before-after": "Add before/after photo pairs below when you have real project photos. Each pair needs matching beforeAfterPairId values. Example shown below (commented out).",
+    "lifestyle": "Add general outdoor/deck lifestyle photos below. These get used as variety in the mix.",
+    "example-before-after": {
+      "before": {
+        "path": "images/before-after/deck-01-before.jpg",
+        "source": "local",
+        "type": "before-after",
+        "beforeAfterRole": "before",
+        "beforeAfterPairId": "deck-01",
+        "tags": ["weathered", "wood", "old"],
+        "season": ["all"]
+      },
+      "after": {
+        "path": "images/before-after/deck-01-after.jpg",
+        "source": "local",
+        "type": "before-after",
+        "beforeAfterRole": "after",
+        "beforeAfterPairId": "deck-01",
+        "productLine": "transcend",
+        "colorName": "Spiced Rum",
+        "tags": ["composite", "new", "transformation"],
+        "season": ["all"]
+      }
+    }
+  }
+}

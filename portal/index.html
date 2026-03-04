@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Social Post Review — Lake Country Decking</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="portal.css" />
+
+  <!--
+    Hidden form — Netlify detects this at build time so it can receive
+    server-side form submissions from the background function notification.
+    Configure email notification in Netlify Dashboard → Forms → post-notification.
+  -->
+  <form name="post-notification" data-netlify="true" hidden>
+    <input type="hidden" name="message" />
+    <input type="hidden" name="portal-url" />
+  </form>
+</head>
+<body>
+
+<header>
+  <div>
+    <h1>Lake Country Decking</h1>
+    <p>Social Post Review Portal</p>
+  </div>
+  <div class="header-date" id="header-date"></div>
+</header>
+
+<div id="status-bar" class="loading">
+  <div class="spinner"></div>
+  <span id="status-text">Loading today's post options…</span>
+</div>
+
+<div id="date-picker-row">
+  <label for="date-input">View drafts for:</label>
+  <input type="date" id="date-input" />
+  <button id="load-date-btn">Load</button>
+</div>
+
+<div id="published-notice"></div>
+
+<div id="empty-state">
+  <h2>No drafts found</h2>
+  <p id="empty-message">Drafts for this date haven't been generated yet.<br>They are created automatically every 3 days at 7 AM.</p>
+</div>
+
+<div id="cards-grid"></div>
+
+<!-- Confirmation modal -->
+<div id="modal-backdrop">
+  <div id="modal" role="dialog" aria-modal="true">
+    <h2>Publish this post?</h2>
+    <p id="modal-body">This will post to both Facebook and Instagram. This action cannot be undone.</p>
+    <div class="modal-actions">
+      <button id="modal-cancel">Cancel</button>
+      <button id="modal-confirm">Post to Facebook &amp; Instagram</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast" role="alert" aria-live="polite"></div>
+
+<script src="portal.js"></script>
+</body>
+</html>
