@@ -154,10 +154,11 @@ async function loadImage(src) {
   });
 }
 
-// Resolve image path — supports absolute URLs (http/https) and relative paths
+// Resolve image path — routes external URLs through the image proxy so the
+// canvas can draw them without CORS taint issues.
 function resolveImagePath(imagePath) {
   if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
-    return imagePath;
+    return `${SITE_URL}/.netlify/functions/image-proxy?url=${encodeURIComponent(imagePath)}`;
   }
   return `${SITE_URL}/${imagePath}`;
 }
