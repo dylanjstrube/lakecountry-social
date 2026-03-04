@@ -74,7 +74,7 @@ CSS variables used in portal.css:
 | `--sand`        | `#f5ede0` | Warm sand background         |
 | `--warm-white`  | `#faf8f4` | Page background              |
 | `--charcoal`    | `#2a2a2a` | Body text                    |
-| `--accent`      | `#c8a96e` | Gold — headlines on canvas   |
+| `--accent`      | `#c8a96e` | Gold — available, not currently used on canvas |
 
 Google Fonts: **Playfair Display** (headlines) · **DM Sans** (body) — same as deckWebsite.
 
@@ -97,6 +97,8 @@ META_PAGE_ID=               # Facebook Page ID
 META_IG_USER_ID=            # Instagram Business Account ID
 META_APP_ID=                # Meta App ID (for token refresh)
 META_APP_SECRET=            # Meta App Secret
+META_DELAFIELD_PLACE_ID=    # Optional: Facebook Place ID for Delafield, WI (location tagging)
+                            # Find via: GET /search?type=place&q=Delafield+WI&fields=name,id
 URL=                        # Set automatically by Netlify (your site URL)
 ```
 
@@ -112,13 +114,33 @@ URL=                        # Set automatically by Netlify (your site URL)
 ## CTA Strategy
 - 8 of 10 posts per batch → website: `www.lakecountrydecking.com`
 - 2 of 10 posts per batch → phone: `(920) 355-2174`
+- Facebook posts include a native **"Get Quote"** CTA button (`call_to_action: GET_QUOTE`) linking to the website
+- Instagram organic posts do not support native CTA buttons via Graph API — website URL is prominent in caption
 
 ## Canvas Composition (1080×1080px JPEG)
 1. Source image (cover-fit)
-2. Dark gradient overlay (bottom-heavy)
-3. Headline — Playfair Display bold, gold (#c8a96e), ~760px from top
-4. Body copy — DM Sans 300, white/88%, ~870px from top
-5. CTA strip — trex-green (#2d5a27) bar, white text at bottom
+2. **Headline only** — no body copy on canvas
+3. Centered semi-transparent black box (`rgba(0,0,0,0.40)`, 18px rounded corners) sized to fit the headline
+4. Headline — Playfair Display bold, white (#ffffff), centered H+V inside the box
+   - Font: 112px (≤20 chars) · 88px (≤35 chars) · 68px (>35 chars)
+5. Bottom banner — trex-green (#2d5a27) bar, 72px tall, white DM Sans 600 28px
+   - Text: "Resurface your existing deck · Free Quotes - Serving SE WI"
+
+## Portal Card Display
+Badges shown per card: **Before/After/Lifestyle type badge only**
+Removed: Trex product line badge, Website/Phone CTA badge, color name label
+
+## Content Strategy (claude.ts)
+- Headlines focused on **deck resurfacing** — transforming old worn wood decks with Trex composite
+- 10 tone variants per batch, each a distinct emotional angle (no two posts share the same hook):
+  - Pain-point, Seasonal urgency, Aspirational, Neighborhood pride, Financial/value,
+    Time liberation, Transformation, Local/community, Holiday/entertaining, FOMO
+- Seasonal context used aggressively in every headline
+- No product line tags, no color tags, no email/phone in generated copy
+
+## Claude Code Skill
+`/generate-posts` — project skill at `.claude/commands/generate-posts.md`
+Invoke to generate a full 10-post batch with all business rules and seasonal context baked in.
 
 ## Scheduling
 Cron: `0 13 */3 * *` = every 3 days at 7 AM CT (UTC-6)

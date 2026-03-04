@@ -6,12 +6,8 @@ const SITE_URL = window.location.origin;
 // Brand colors (must match CLAUDE.md design system)
 const COLORS = {
   trexGreen:  "#2d5a27",
-  gold:       "#c8a96e",
   white:      "#ffffff",
-  whiteAlpha: "rgba(255,255,255,0.88)",
-  overlay0:   "rgba(0,0,0,0)",
-  overlay55:  "rgba(0,0,0,0.55)",
-  overlay82:  "rgba(0,0,0,0.82)",
+  overlayBox: "rgba(0,0,0,0.40)",
 };
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -95,49 +91,65 @@ async function composePost(draft, imageEl) {
   canvas.height = CANVAS_SIZE;
   const ctx = canvas.getContext("2d");
 
-  // 1. Background image
+  // 1. Background image (cover-fit)
   drawCover(ctx, imageEl, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
-  // 2. Dark gradient overlay (bottom-heavy)
-  const grad = ctx.createLinearGradient(0, 300, 0, CANVAS_SIZE);
-  grad.addColorStop(0,    COLORS.overlay0);
-  grad.addColorStop(0.45, COLORS.overlay55);
-  grad.addColorStop(1,    COLORS.overlay82);
-  ctx.fillStyle = grad;
-  ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  const { headlineText } = draft.overlayConfig;
 
-  const { headlineText, headlineFontSize, bodyText, bodyFontSize } = draft.overlayConfig;
-  const pad = 60;
-  const textWidth = CANVAS_SIZE - pad * 2;
+  // Scale font size based on headline length
+  let fontSize = 112;
+  if (headlineText.length > 35) fontSize = 68;
+  else if (headlineText.length > 20) fontSize = 88;
 
-  // 3. Headline — Playfair Display bold, gold
-  ctx.fillStyle   = COLORS.gold;
-  ctx.textAlign   = "left";
+  const boxPadH = 48;  // horizontal padding inside the black box
+  const boxPadV = 40;  // vertical padding inside the black box
+  const textMaxW = CANVAS_SIZE - boxPadH * 4;  // text wrap width (leaves margin from box edges)
+  const lineH = fontSize + 14;
+
+  // 2. Measure how many lines the headline will wrap to
+  ctx.font = `bold ${fontSize}px 'Playfair Display'`;
+  const words = headlineText.split(" ");
+  let line = "";
+  let lineCount = 1;
+  for (const word of words) {
+    const test = line ? `${line} ${word}` : word;
+    if (ctx.measureText(test).width > textMaxW && line) {
+      lineCount++;
+      line = word;
+    } else {
+      line = test;
+    }
+  }
+
+  const textBlockH = lineCount * lineH;
+  const boxW = CANVAS_SIZE - boxPadH * 2;
+  const boxH = textBlockH + boxPadV * 2;
+  const boxX = boxPadH;
+  const boxY = (CANVAS_SIZE - boxH) / 2;
+
+  // 3. Centered semi-transparent black rounded rectangle behind the headline
+  ctx.fillStyle = COLORS.overlayBox;
+  ctx.beginPath();
+  ctx.roundRect(boxX, boxY, boxW, boxH, 18);
+  ctx.fill();
+
+  // 4. Headline — Playfair Display bold, white, centered in the box
+  ctx.fillStyle    = COLORS.white;
+  ctx.textAlign    = "center";
   ctx.textBaseline = "top";
-  ctx.font = `bold ${headlineFontSize}px 'Playfair Display'`;
-  const headlineY = wrapText(ctx, headlineText, pad, 700, textWidth, headlineFontSize + 10);
+  ctx.font = `bold ${fontSize}px 'Playfair Display'`;
+  wrapText(ctx, headlineText, CANVAS_SIZE / 2, boxY + boxPadV, textMaxW, lineH);
 
-  // 4. Body copy — DM Sans light, white
-  ctx.fillStyle = COLORS.whiteAlpha;
-  ctx.font = `300 ${bodyFontSize}px 'DM Sans'`;
-  // Clamp body to caption before hashtags (first paragraph only)
-  const bodyOnly = bodyText.split("\n\n")[0].trim();
-  wrapText(ctx, bodyOnly, pad, headlineY + 12, textWidth, bodyFontSize + 8);
-
-  // 5. CTA strip at bottom
-  const stripH = 88;
+  // 5. Bottom banner — trex-green bar with resurfacing tagline
+  const bannerH = 72;
   ctx.fillStyle = COLORS.trexGreen;
-  ctx.fillRect(0, CANVAS_SIZE - stripH, CANVAS_SIZE, stripH);
+  ctx.fillRect(0, CANVAS_SIZE - bannerH, CANVAS_SIZE, bannerH);
 
-  ctx.fillStyle   = COLORS.white;
-  ctx.textAlign   = "center";
+  ctx.fillStyle    = COLORS.white;
+  ctx.textAlign    = "center";
   ctx.textBaseline = "middle";
-  ctx.font = "600 26px 'DM Sans'";
-
-  const ctaText = draft.ctaType === "website"
-    ? "Lake Country Decking  ·  www.lakecountrydecking.com"
-    : "Lake Country Decking  ·  Free Quote  ·  (920) 355-2174";
-  ctx.fillText(ctaText, CANVAS_SIZE / 2, CANVAS_SIZE - stripH / 2);
+  ctx.font         = "600 28px 'DM Sans'";
+  ctx.fillText("Resurface your existing deck  ·  Free Quotes  -  Serving SE WI", CANVAS_SIZE / 2, CANVAS_SIZE - bannerH / 2);
 
   return canvas;
 }
@@ -209,10 +221,7 @@ function renderCard(draft, isPublished) {
     </div>
     <div class="card-body">
       <div class="card-meta">
-        ${makeProductBadge(draft)}
         ${makeTypeBadge(draft)}
-        ${makeCtaBadge(draft)}
-        ${draft.colorName ? `<span style="font-size:0.72rem;color:#666">${draft.colorName}</span>` : ""}
       </div>
       <div class="card-caption">${captionOnly}</div>
       <div class="card-hashtags">${hashtagStr}</div>

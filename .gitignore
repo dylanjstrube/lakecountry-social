@@ -2,5 +2,6 @@
 node_modules/
 .netlify/
 *.js.map
-.claude/
+.claude/*
+!.claude/commands/
 deno.lock
